@@ -1,6 +1,7 @@
 # Pundit
 [![Build Status](https://secure.travis-ci.org/bmuller/pundit-elixir.png?branch=master)](https://travis-ci.org/bmuller/pundit-elixir)
 [![Hex pm](http://img.shields.io/hexpm/v/pundit.svg?style=flat)](https://hex.pm/packages/pundit)
+[![API Docs](https://img.shields.io/badge/api-docs-lightgreen.svg?style=flat)](https://hexdocs.pm/pundit/)
 
 Pundit provides a set of helpers which guide you in leveraging regular Elixir methods to
 build a simple authorization system.  This library is based heavily on Jonas Nicklas' [Ruby project of the same name](https://github.com/varvet/pundit).
@@ -17,7 +18,7 @@ To install Pundit, just add an entry to your `mix.exs`:
 def deps do
   [
     # ...
-    {:pundit, "~> 0.0.1"}
+    {:pundit, "~> 0.1"}
   ]
 end
 ```
@@ -39,8 +40,9 @@ defmodule Post do
   defstruct [:author, :title, :body, :comments]
 
   defmodule Policy do
-    # This will initialize all the functions listed below, that all return false
-    # by default. Override them individually to return true when they should.
+    # This will initialize all the action functions, all of which return false
+    # by default. Override them individually to return true when they should,
+    # like edit? is overriden below.
     use Pundit.DefaultPolicy
 
     def edit?(post, user) do
@@ -52,6 +54,7 @@ end
 post = %Post{author: "Snake Plissken"}
 author = %{name: "Snake Plissken"}
 # next line is same as Pundit.can?(post, author, :edit?)
+# Pundit will just delegate to Post.Policy.edit?(post, user)
 if Pundit.edit?(post, author) do
   IO.puts("Can edit!")
 end
@@ -91,12 +94,14 @@ query = from p in Post, where: p.comment_count > 10
 popular_posts = Pundit.scope(query, user) |> Repo.all()
 ```
 
+See [the docs](https://hexdocs.pm/pundit) for more examples.
+
 ## Running Tests
 
 To run tests:
 
-``` shell
-$> mix test
+```shell
+$ mix test
 ```
 
 ## Reporting Issues

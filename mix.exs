@@ -1,7 +1,7 @@
 defmodule Pundit.MixProject do
   use Mix.Project
 
-  @version "0.0.1"
+  @version "0.1.0"
 
   def project do
     [
@@ -52,7 +52,7 @@ defmodule Pundit.MixProject do
   defp deps do
     [
       {:ex_doc, "~> 0.18", only: :dev},
-      {:credo, "~> 1.0.0", only: [:dev, :test], runtime: false},
+      {:credo, "~> 1.0", only: [:dev, :test], runtime: false},
       {:ecto, "~> 3.0", optional: true}
     ]
   end
