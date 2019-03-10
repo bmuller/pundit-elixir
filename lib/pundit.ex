@@ -190,10 +190,6 @@ defmodule Pundit do
     end
   end
 
-  def scope(%{__struct__: Ecto.Query, from: %{source: {_, schema}}}, user) do
-    scope(schema, user)
-  end
-
   @doc """
   Scope a `Ecto.Query` or `Ecto.Schema` to a given user.
 
@@ -216,11 +212,21 @@ defmodule Pundit do
   This is just helpful shorthand.
   """
   @spec scope(schema :: module() | Ecto.Query.t(), user :: term()) :: Ecto.Query.t()
-  def scope(schema, user) when is_atom(schema) do
-    module = Module.concat(schema, Policy)
+  def scope(%{__struct__: Ecto.Query, from: %{source: {_, schema}}} = query, user) do
+    schema
+    |> Module.concat(Policy)
+    |> do_scope(query, user)
+  end
 
+  def scope(schema, user) when is_atom(schema) do
+    schema
+    |> Module.concat(Policy)
+    |> do_scope(schema, user)
+  end
+
+  defp do_scope(module, query, user) do
     if Kernel.function_exported?(module, :scope, 2) do
-      apply(module, :scope, [schema, user])
+      apply(module, :scope, [query, user])
     else
       raise NotDefinedError, message: "Function scope/2 not defined on #{module}"
     end
