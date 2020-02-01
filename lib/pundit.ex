@@ -182,7 +182,7 @@ defmodule Pundit do
   def can?(thing, user, action) do
     module = thing |> get_module() |> Module.concat(Policy)
 
-    with true <- Code.ensure_compiled?(module),
+    with {:module, _module} <- Code.ensure_compiled(module),
          true <- Kernel.function_exported?(module, action, 2) do
       apply(module, action, [thing, user])
     else
