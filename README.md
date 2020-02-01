@@ -18,7 +18,7 @@ To install Pundit, just add an entry to your `mix.exs`:
 def deps do
   [
     # ...
-    {:pundit, "~> 0.1"}
+    {:pundit, "~> 1.0"}
   ]
 end
 ```
