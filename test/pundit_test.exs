@@ -34,6 +34,12 @@ defmodule PunditTest do
       refute Pundit.delete?(thing, %{})
     end
 
+    test "providing nil should ArgumentError" do
+      assert_raise ArgumentError, fn ->
+        refute Pundit.show?(nil, %{})
+      end
+    end
+
     test "calling authorize! raises errors when appropriate" do
       assert_raise(NotAuthorizedError, fn ->
         Pundit.authorize!(ReadableThing, %{}, :edit?)

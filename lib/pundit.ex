@@ -57,7 +57,7 @@ defmodule Pundit do
 
         defmodule Policy do
           use Pundit.DefaultPolicy
-          
+
           def scope(query, user) do
             from post in query,
               where: post.author_id == ^user.id
@@ -102,7 +102,7 @@ defmodule Pundit do
   Returns true only if the user should be allowed to see a form to create a new thing.
 
   See [the page on Phoenix controllers](https://hexdocs.pm/phoenix/controllers.html#actions) for more details on the
-  purpose of this action. 
+  purpose of this action.
   """
   @spec new?(thing :: struct() | module(), user :: term()) :: boolean()
   def new?(thing, user) do
@@ -121,7 +121,7 @@ defmodule Pundit do
   Returns true only if the user should be allowed to see a form for updating the thing.
 
   See [the page on Phoenix controllers](https://hexdocs.pm/phoenix/controllers.html#actions) for more details on the
-  purpose of this action. 
+  purpose of this action.
   """
   @spec edit?(thing :: struct() | module(), user :: term()) :: boolean()
   def edit?(thing, user) do
@@ -237,7 +237,7 @@ defmodule Pundit do
       is_atom(thing) and Kernel.function_exported?(thing, :__info__, 1) ->
         thing
 
-      Map.has_key?(thing, :__struct__) ->
+      is_map(thing) and Map.has_key?(thing, :__struct__) ->
         thing.__struct__
 
       true ->
