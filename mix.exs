@@ -2,6 +2,7 @@ defmodule Pundit.MixProject do
   use Mix.Project
 
   @version "1.0.0"
+  @source_url "https://github.com/bmuller/pundit-elixir"
 
   def project do
     [
@@ -13,18 +14,24 @@ defmodule Pundit.MixProject do
       deps: deps(),
       description: "Simple authorization helpers for Elixir structs",
       package: package(),
-      source_url: "https://github.com/bmuller/pundit-elixir",
-      docs: [
-        source_ref: "v#{@version}",
-        main: "Pundit",
-        formatters: ["html", "epub"]
-      ]
+      source_url: @source_url,
+      preferred_cli_env: [test: :test, "ci.test": :test],
+      docs: docs()
+    ]
+  end
+
+  defp docs do
+    [
+      source_ref: "v#{@version}",
+      main: "Pundit",
+      formatters: ["html"],
+      source_url: @source_url
     ]
   end
 
   defp aliases do
     [
-      test: [
+      "ci.test": [
         "format --check-formatted",
         "test",
         "credo"
@@ -51,9 +58,9 @@ defmodule Pundit.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ex_doc, "~> 0.21", only: :dev},
-      {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
-      {:ecto, "~> 3.0", optional: true}
+      {:ecto, "~> 3.0", optional: true},
+      {:ex_doc, "~> 0.24", only: :dev},
+      {:credo, "~> 1.5", only: [:dev, :test], runtime: false}
     ]
   end
 end
