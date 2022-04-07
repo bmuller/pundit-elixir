@@ -1,7 +1,7 @@
 defmodule Pundit.MixProject do
   use Mix.Project
 
-  @version "1.0.0"
+  @version "1.0.1"
   @source_url "https://github.com/bmuller/pundit-elixir"
 
   def project do
@@ -9,7 +9,7 @@ defmodule Pundit.MixProject do
       app: :pundit,
       aliases: aliases(),
       version: @version,
-      elixir: "~> 1.8",
+      elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       description: "Simple authorization helpers for Elixir structs",
@@ -23,9 +23,10 @@ defmodule Pundit.MixProject do
   defp docs do
     [
       source_ref: "v#{@version}",
-      main: "Pundit",
+      main: "readme",
       formatters: ["html"],
-      source_url: @source_url
+      source_url: @source_url,
+      extras: ["README.md"]
     ]
   end
 
@@ -41,10 +42,13 @@ defmodule Pundit.MixProject do
 
   def package do
     [
-      files: ["lib", "mix.exs", "README*", "LICENSE*"],
+      files: ~w(lib mix.exs README.md LICENSE CHANGELOG.md),
       maintainers: ["Brian Muller"],
       licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/bmuller/pundit-elixir"}
+      links: %{
+        "Changelog" => "#{@source_url}/blob/master/CHANGELOG.md",
+        "GitHub" => @source_url
+      }
     ]
   end
 
@@ -59,8 +63,8 @@ defmodule Pundit.MixProject do
   defp deps do
     [
       {:ecto, "~> 3.0", optional: true},
-      {:ex_doc, "~> 0.24", only: :dev},
-      {:credo, "~> 1.5", only: [:dev, :test], runtime: false}
+      {:ex_doc, "~> 0.28", only: :dev},
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false}
     ]
   end
 end
