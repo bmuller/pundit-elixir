@@ -225,10 +225,12 @@ defmodule Pundit do
   end
 
   defp do_scope(module, query, user) do
-    if Kernel.function_exported?(module, :scope, 2) do
+    with {:module, _module} <- Code.ensure_compiled(module),
+         true <- Kernel.function_exported?(module, :scope, 2) do
       module.scope(query, user)
     else
-      raise NotDefinedError, message: "Function scope/2 not defined on #{module}"
+      _ ->
+        raise NotDefinedError, message: "Function scope/2 not defined on #{module}"
     end
   end
 
