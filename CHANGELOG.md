@@ -1,5 +1,11 @@
 # Changelog for v1.x
 
+## v1.0.1 (2023-02-09)
+
+### Enhancements
+
+  * Fixed issue with potentially uncompiled module when using scope/2 (#2)
+
 ## v1.0.1 (2022-04-07)
 
 ### Deprecations
