@@ -14,6 +14,7 @@ jobs:
         with:
           elixir-version: ${{matrix.elixir}}
           otp-version: ${{matrix.otp}}
+          version-type: loose
       - run: mix deps.get
       - run: mix credo
       - run: mix format --check-formatted
