@@ -1,6 +1,6 @@
 # Changelog for v1.x
 
-## v1.0.1 (2023-02-09)
+## v1.0.2 (2023-02-09)
 
 ### Enhancements
 
