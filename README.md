@@ -6,7 +6,7 @@
 Pundit provides a set of helpers which guide you in leveraging regular Elixir methods to
 build a simple authorization system.  This library is based heavily on Jonas Nicklas' [Ruby project of the same name](https://github.com/varvet/pundit).
 
-Simple Elixir functions are defined for a given struct and allow you to encapsulate authentication logic.  You can use
+Simple Elixir functions are defined for a given struct and allow you to encapsulate authorization logic.  You can use
 this code within a module that is an Ecto.Schema, but that's not necessary (Ecto isn't required).  The action names are taken from the list
 of [actions defined by Phoenix controllers](https://hexdocs.pm/phoenix/controllers.html#actions).
 
@@ -79,7 +79,7 @@ defmodule Post do
 
   defmodule Policy do
     use Pundit.DefaultPolicy
-          
+
     def scope(query, user) do
       from post in query,
         where: post.author_id == ^user.id
