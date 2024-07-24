@@ -1,21 +1,77 @@
 name: ci
 on: push
 
+env:
+  LATEST_ELIXIR_VERSION: 1.17.x
+  LATEST_OTP_VERSION: 27.x
+
 jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        otp: ['24', '25']
-        elixir: ['1.13.4', '1.14']
+        include:
+          - pair:
+              otp: 27.x
+              elixir: 1.17.x
+          - pair:
+              otp: 26.x
+              elixir: 1.17.x
+          - pair:
+              otp: 26.x
+              elixir: 1.16.x
+          - pair:
+              otp: 26.x
+              elixir: 1.15.x
+          - pair:
+              otp: 25.x
+              elixir: 1.15.x
+          - pair:
+              otp: 25.x
+              elixir: 1.14.x
+          - pair:
+              otp: 25.x
+              elixir: 1.13.x
+          - pair:
+              otp: 24.x
+              elixir: 1.16.x
+          - pair:
+              otp: 24.x
+              elixir: 1.15.x
+          - pair:
+              otp: 24.x
+              elixir: 1.14.x
+          - pair:
+              otp: 24.x
+              elixir: 1.13.x
+
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: erlef/setup-beam@v1
         with:
-          elixir-version: ${{matrix.elixir}}
-          otp-version: ${{matrix.otp}}
-          version-type: loose
+          elixir-version: ${{ matrix.pair.elixir }}
+          otp-version: ${{ matrix.pair.otp }}
       - run: mix deps.get
-      - run: mix credo
       - run: mix format --check-formatted
+      - run: mix credo
       - run: mix test
+
+  dialyzer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: erlef/setup-beam@v1
+        with:
+          elixir-version:  ${{ env.LATEST_ELIXIR_VERSION }}
+          otp-version: ${{ env.LATEST_OTP_VERSION }}
+      - uses: actions/cache@v4
+        id: mix-cache # id to use in retrieve action
+        with:
+          path: |
+            _build
+            deps
+            priv/plts
+          key: dialyzer-cache-v0-${{matrix.elixir}}-${{matrix.otp}}-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
+      - if: steps.mix-cache.outputs.cache-hit != 'true'
+        run: mix do deps.get, deps.compile
+      - run: mix dialyzer

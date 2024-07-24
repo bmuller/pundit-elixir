@@ -64,7 +64,8 @@ defmodule Pundit.MixProject do
     [
       {:ecto, "~> 3.0", optional: true},
       {:ex_doc, "~> 0.28", only: :dev},
-      {:credo, "~> 1.6", only: [:dev, :test], runtime: false}
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
+      {:dialyxir, "~> 1.2", only: :dev, runtime: false}
     ]
   end
 end
