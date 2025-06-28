@@ -1,5 +1,5 @@
 # Pundit
-[![Build Status](https://secure.travis-ci.org/bmuller/pundit-elixir.png?branch=master)](https://travis-ci.org/bmuller/pundit-elixir)
+[![Build Status](https://github.com/bmuller/pundit-elixir/actions/workflows/ci.yml/badge.svg)](https://github.com/bmuller/pundit-elixir/actions/workflows/ci.yml)
 [![Hex pm](http://img.shields.io/hexpm/v/pundit.svg?style=flat)](https://hex.pm/packages/pundit)
 [![API Docs](https://img.shields.io/badge/api-docs-lightgreen.svg?style=flat)](https://hexdocs.pm/pundit/)
 
@@ -18,7 +18,7 @@ To install Pundit, just add an entry to your `mix.exs`:
 def deps do
   [
     # ...
-    {:pundit, "~> 1.0"}
+    {:pundit, "~> 1.1"}
   ]
 end
 ```
