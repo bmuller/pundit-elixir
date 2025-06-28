@@ -1,6 +1,6 @@
 # Changelog for v1.x
 
-## v1.1.0 (2024-06-27)
+## v1.1.0 (2025-06-27)
 
 ### Deprecations
 
