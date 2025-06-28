@@ -1,7 +1,7 @@
 defmodule Pundit.MixProject do
   use Mix.Project
 
-  @version "1.0.2"
+  @version "1.1.0"
   @source_url "https://github.com/bmuller/pundit-elixir"
 
   def project do
@@ -9,15 +9,18 @@ defmodule Pundit.MixProject do
       app: :pundit,
       aliases: aliases(),
       version: @version,
-      elixir: "~> 1.9",
+      elixir: "~> 1.15",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       description: "Simple authorization helpers for Elixir structs",
       package: package(),
       source_url: @source_url,
-      preferred_cli_env: [test: :test, "ci.test": :test],
       docs: docs()
     ]
+  end
+
+  def cli do
+    [preferred_cli_env: [test: :test, "ci.test": :test]]
   end
 
   defp docs do
