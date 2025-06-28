@@ -2,8 +2,8 @@ name: ci
 on: push
 
 env:
-  LATEST_ELIXIR_VERSION: 1.17.x
-  LATEST_OTP_VERSION: 27.x
+  LATEST_ELIXIR_VERSION: 1.18.x
+  LATEST_OTP_VERSION: 28.x
 
 jobs:
   test:
