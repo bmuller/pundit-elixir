@@ -20,7 +20,7 @@ defmodule Pundit.MixProject do
   end
 
   def cli do
-    [preferred_cli_env: [test: :test, "ci.test": :test]]
+    [preferred_envs: [test: :test, "ci.test": :test]]
   end
 
   defp docs do
