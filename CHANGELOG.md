@@ -22,4 +22,4 @@
 
 ### Enhancements
 
-  * Update code to handle Elixir v10.0 changes (notably, the removal of `Code.ensure_compiled?`)
+  * Update code to handle Elixir v1.10.0 changes (notably, the removal of `Code.ensure_compiled?`)
