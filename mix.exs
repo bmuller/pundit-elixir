@@ -1,7 +1,7 @@
 defmodule Pundit.MixProject do
   use Mix.Project
 
-  @version "1.1.0"
+  @version "1.1.1"
   @source_url "https://github.com/bmuller/pundit-elixir"
 
   def project do
@@ -38,7 +38,8 @@ defmodule Pundit.MixProject do
       "ci.test": [
         "format --check-formatted",
         "test",
-        "credo"
+        "credo",
+        "dialyzer"
       ]
     ]
   end
@@ -68,7 +69,7 @@ defmodule Pundit.MixProject do
       {:ecto, "~> 3.0", optional: true},
       {:ex_doc, "~> 0.28", only: :dev},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
-      {:dialyxir, "~> 1.2", only: :dev, runtime: false}
+      {:dialyxir, "~> 1.2", only: [:dev, :test], runtime: false}
     ]
   end
 end

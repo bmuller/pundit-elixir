@@ -1,5 +1,12 @@
 # Changelog for v1.x
 
+## v1.1.1 (2026-01-19)
+
+### Enhancements
+
+  * Fixed CI link in docs homepage / README
+  * Included dialyxir in the test environment and ci.test mix task
+
 ## v1.1.0 (2025-06-27)
 
 ### Deprecations
