@@ -236,7 +236,7 @@ defmodule Pundit do
 
   defp get_module(thing) do
     cond do
-      is_atom(thing) and Kernel.function_exported?(thing, :__info__, 1) ->
+      is_atom(thing) and match?({:module, _}, Code.ensure_loaded(thing)) ->
         thing
 
       is_map(thing) and Map.has_key?(thing, :__struct__) ->
