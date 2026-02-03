@@ -1,5 +1,11 @@
 # Changelog for v1.x
 
+## Unreleased
+
+### Fixed
+
+  * Fix module detection during code reload (#6)
+
 ## v1.1.1 (2026-01-19)
 
 ### Enhancements
