@@ -139,7 +139,7 @@ defmodule Pundit do
   @doc """
   Raise a `Pundit.NotAuthorizedError` exception unless the user can perform the action on the thing.
   """
-  @spec authorize!(thing :: struct() | module(), user :: term(), action :: atom()) :: boolean()
+  @spec authorize!(thing :: struct() | module(), user :: term(), action :: atom()) :: true
   def authorize!(thing, user, action) do
     case authorize(thing, user, action) do
       {:ok} ->
@@ -166,7 +166,7 @@ defmodule Pundit do
   end
 
   @doc """
-  Determine if a use can perform an action on a given thing.
+  Determine if a user can perform an action on a given thing.
 
   This will attempt to call a function with the same name as the action on the policy
   module of the given thing.  For instance:
@@ -186,7 +186,7 @@ defmodule Pundit do
          true <- Kernel.function_exported?(module, action, 2) do
       apply(module, action, [thing, user])
     else
-      _ -> raise NotDefinedError, message: "#{module}.#{action} is not defined."
+      _ -> raise NotDefinedError, message: "#{module}.#{action}/2 is not defined."
     end
   end
 
@@ -230,7 +230,7 @@ defmodule Pundit do
       module.scope(query, user)
     else
       _ ->
-        raise NotDefinedError, message: "Function scope/2 not defined on #{module}"
+        raise NotDefinedError, message: "#{module}.scope/2 is not defined."
     end
   end
 

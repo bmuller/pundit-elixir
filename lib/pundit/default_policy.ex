@@ -4,7 +4,7 @@ defmodule Pundit.DefaultPolicy do
 
   All of the functions here are named for actions in a [Phoenix controller](https://hexdocs.pm/phoenix/controllers.html#actions).
 
-  If you `use` this module, then default implementations will be added in your module that all 
+  If you `use` this module, then default implementations will be added in your module that all
   return `false` by default (default safe, nothing is permitted).  All are overrideable.
   """
 
@@ -27,7 +27,7 @@ defmodule Pundit.DefaultPolicy do
   Returns true only if the user should be allowed to see a form to create a new thing.
 
   See [the page on Phoenix controllers](https://hexdocs.pm/phoenix/controllers.html#actions) for more details on the
-  purpose of this action. 
+  purpose of this action.
   """
   @callback new?(thing :: struct() | module(), user :: term()) :: boolean()
 
@@ -40,7 +40,7 @@ defmodule Pundit.DefaultPolicy do
   Returns true only if the user should be allowed to see a form for updating the thing.
 
   See [the page on Phoenix controllers](https://hexdocs.pm/phoenix/controllers.html#actions) for more details on the
-  purpose of this action. 
+  purpose of this action.
   """
   @callback edit?(thing :: struct() | module(), user :: term()) :: boolean()
 
